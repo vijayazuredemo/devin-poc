@@ -1,0 +1,42 @@
+# Manual API tests. Start the API first (dotnet run), then click "Send Request"
+# in VS Code (REST Client extension), Visual Studio, or Rider.
+@baseUrl = http://localhost:5211
+
+### Get all tasks (200)
+GET {{baseUrl}}/api/tasks
+
+### Create a task (201)
+POST {{baseUrl}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Learn Devin",
+  "description": "Build a task manager"
+}
+
+### Create with empty title (400)
+POST {{baseUrl}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": ""
+}
+
+### Get task by id (200, or 404 if missing)
+GET {{baseUrl}}/api/tasks/1
+
+### Update a task (200)
+PUT {{baseUrl}}/api/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Learn Devin (updated)",
+  "description": "Build a task manager",
+  "isCompleted": true
+}
+
+### Delete a task (204)
+DELETE {{baseUrl}}/api/tasks/1
+
+### Get deleted task (404)
+GET {{baseUrl}}/api/tasks/1
